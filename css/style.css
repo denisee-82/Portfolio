@@ -697,15 +697,18 @@ section{
     flex-direction: column-reverse;
     margin: 5rem 4rem;
   }
-  .home-circle-1{
-    width: 45vw;
-    height: 45vw;
-    top: 50rem;
+  .home-circle-1 {
+    width: 35vw;
+    height: 35vw;
+    top: auto;
+    bottom: -5vw;
+    right: -10vw;
   }
-  .home-circle-2{
-    width: 55vw;
-    height: 55vw;
-    top: 10rem;
+  .home-circle-2 {
+    width: 40vw;
+    height: 40vw;
+    top: -10vw;
+    right: -10vw;
   }
   .home-img{
     display: grid;
@@ -726,9 +729,11 @@ section{
   .about{
     flex-direction: column-reverse;
   }
-  .about-circle{
-    height: 50vw;
-    width: 50vw;
+  .about-circle {
+    width: 45vw;
+    height: 45vw;
+    left: -15vw;
+    margin-top: 0;
   }
   .about-content{
     margin: 1rem 4rem
