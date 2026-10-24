@@ -9,9 +9,7 @@
   <meta name="description" content="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css">
   <script>
-    // set the theme before the page paints (prevents a white flash)
     try {
-      // default is light; dark only if the visitor picked it with the toggle
       var t = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
       document.documentElement.setAttribute('data-theme', t);
     } catch (e) {}

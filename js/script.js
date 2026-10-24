@@ -31,9 +31,6 @@ navLinks.forEach(l => l.onclick = () => {
   navbar.classList.remove('active');
 });
 
-/* =========================================================
-   PROJECTS: INFINITE CAROUSEL
-   ========================================================= */
 (function () {
   const track = document.querySelector('.carousel-track');
   if (!track) return;
@@ -45,10 +42,9 @@ navLinks.forEach(l => l.onclick = () => {
   const nextBtn = document.querySelector('.carousel-btn.next');
   const playBtn = document.querySelector('.carousel-btn.play');
 
-  const AUTO_SPEED = 0.04; // pixels per millisecond (about 40px/sec)
+  const AUTO_SPEED = 0.04;
 
-  // Build [clones][originals][clones] so it can loop forever in both directions
-  track.style.scrollBehavior = 'auto'; // global smooth-scroll would stall the autoplay
+  track.style.scrollBehavior = 'auto';
 
   const originals = Array.from(track.children);
   const count = originals.length;
@@ -68,8 +64,8 @@ navLinks.forEach(l => l.onclick = () => {
   const firstOriginal = cards[count];
   const firstAfter = cards[count * 2];
 
-  let W = 0;   // width of one full set of cards (including gaps)
-  let cw = 0;  // visible width of the track
+  let W = 0;
+  let cw = 0;
 
   // state flags (autoplay only runs when all of these are false)
   let userPaused = false, focused = false, touching = false, dragging = false;
@@ -81,8 +77,6 @@ navLinks.forEach(l => l.onclick = () => {
     cw = track.clientWidth;
   }
 
-  // Keep scroll position inside the safe middle zone by jumping one set
-  // (the sets are identical, so the jump is invisible)
   function wrap() {
     const lo = W - cw / 2;
     const hi = lo + W;
@@ -103,7 +97,6 @@ navLinks.forEach(l => l.onclick = () => {
     holdUntil = performance.now() + ms;
   }
 
-  /* ---------- custom scroll bar ---------- */
   function getPhase() {
     const p = ((track.scrollLeft - W) % W + W) % W;
     return p / W;
@@ -151,7 +144,6 @@ navLinks.forEach(l => l.onclick = () => {
     thumb.addEventListener('pointercancel', up);
   });
 
-  // click anywhere on the bar to jump there
   bar.addEventListener('pointerdown', e => {
     if (e.target === thumb) return;
     const rect = bar.getBoundingClientRect();
@@ -166,7 +158,6 @@ navLinks.forEach(l => l.onclick = () => {
     if (!animating) scheduleWrap();
   }, { passive: true });
 
-  /* ---------- arrow buttons ---------- */
   function glide(dx) {
     if (animating) return;
     wrap();
@@ -194,14 +185,12 @@ navLinks.forEach(l => l.onclick = () => {
   prevBtn.addEventListener('click', () => glide(-stepSize()));
   nextBtn.addEventListener('click', () => glide(stepSize()));
 
-  /* ---------- pause / play button ---------- */
   playBtn.addEventListener('click', () => {
     userPaused = !userPaused;
     playBtn.querySelector('i').className = userPaused ? 'bx bx-play' : 'bx bx-pause';
     playBtn.setAttribute('aria-label', userPaused ? 'Play auto-scroll' : 'Pause auto-scroll');
   });
 
-  /* ---------- mouse drag on the cards ---------- */
   let startX = 0, startScroll = 0, dragMoved = false;
 
   track.addEventListener('mousedown', e => {
@@ -235,7 +224,6 @@ navLinks.forEach(l => l.onclick = () => {
   }, true);
   track.addEventListener('dragstart', e => e.preventDefault());
 
-  /* ---------- pause rules ---------- */
   carousel.addEventListener('focusin', e => { if (e.target.matches(':focus-visible')) focused = true; });
   carousel.addEventListener('focusout', () => { focused = false; });
 
@@ -257,14 +245,13 @@ navLinks.forEach(l => l.onclick = () => {
   }
 
   let last = performance.now();
-  let pos = 0;      // float position, so tiny steps never get rounded away
-  let lastSeen = 0; // where the browser says we are after our last step
+  let pos = 0;
+  let lastSeen = 0;
   function tick(now) {
     const dt = Math.min(now - last, 50);
     last = now;
     if (canAuto()) {
       if (Math.abs(track.scrollLeft - lastSeen) > 1.5) {
-        // something else moved it (trackpad, wheel, keyboard...): back off for a moment
         pos = track.scrollLeft;
         lastSeen = pos;
         hold(1500);
@@ -282,7 +269,6 @@ navLinks.forEach(l => l.onclick = () => {
     requestAnimationFrame(tick);
   }
 
-  /* ---------- init + resize ---------- */
   function refresh() {
     const phase = W ? getPhase() : 0;
     measure();
@@ -300,9 +286,6 @@ navLinks.forEach(l => l.onclick = () => {
 })();
 
 
-/* =========================================================
-   PDF READER (PDF.js)
-   ========================================================= */
 (function () {
   const modal = document.getElementById('pdfModal');
   if (!modal) return;
@@ -443,7 +426,6 @@ navLinks.forEach(l => l.onclick = () => {
     renderPage();
   }
 
-  // any link with class "open-pdf" opens the reader (also works for cloned carousel cards)
   document.addEventListener('click', e => {
     const link = e.target.closest('.open-pdf');
     if (!link) return;
@@ -474,10 +456,6 @@ navLinks.forEach(l => l.onclick = () => {
   });
 })();
 
-
-/* =========================================================
-   DARK MODE TOGGLE
-   ========================================================= */
 (function () {
   const btn = document.getElementById('themeToggle');
   if (!btn) return;
@@ -499,10 +477,6 @@ navLinks.forEach(l => l.onclick = () => {
   });
 })();
 
-
-/* =========================================================
-   CONTACT FORM (Web3Forms)
-   ========================================================= */
 (function () {
   const form = document.getElementById('contactForm');
   if (!form) return;
