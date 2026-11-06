@@ -15,7 +15,9 @@
   --main-color: #75162E ;
   --card-bg: #ffffff;
   --border-color: rgb(224, 224, 224);
-  --header-bg: rgba(255, 255, 255, 0.7);
+  --header-bg: rgba(255, 255, 255, 0.38);
+  --header-border: rgba(255, 255, 255, 0.7);
+  --header-shadow: 0 8px 32px rgba(117, 22, 46, 0.12);
   --circle-2: #712030;
   --viewer-bg: #e9e6e6;
 }
@@ -26,7 +28,9 @@
   --main-color: #c73e5c;
   --card-bg: #241a1e;
   --border-color: #3b2c32;
-  --header-bg: rgba(20, 14, 16, 0.75);
+  --header-bg: rgba(36, 26, 30, 0.45);
+  --header-border: rgba(255, 255, 255, 0.12);
+  --header-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
   --circle-2: #8f2a40;
   --viewer-bg: #2a2024;
   color-scheme: dark;
@@ -42,16 +46,23 @@ body{
 }
 .header{
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 4rem 9%;
+  top: 1.6rem;
+  left: 2rem;
+  right: 2rem;
+  max-width: 130rem;
+  margin: 0 auto;
+  padding: 1.4rem 3rem;
   background: var(--header-bg);
-  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid var(--header-border);
+  border-radius: 3rem;
+  box-shadow: var(--header-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.35);
   display: flex;
   align-items: center;
   justify-content: space-between;
   z-index: 100;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .logo{
   font-size: 2rem;
@@ -87,8 +98,8 @@ span{
 /* ---------- THEME TOGGLE ---------- */
 .theme-toggle{
   flex: 0 0 auto;
-  width: 4.2rem;
-  height: 4.2rem;
+  width: 3.8rem;
+  height: 3.8rem;
   margin-left: 3rem;
   border-radius: 50%;
   background: transparent;
@@ -938,8 +949,10 @@ body.modal-open{
   .carousel{
     width: 92%;
   }
-  header{
-    padding: 2rem 3%;
+  .header{
+    left: 1.2rem;
+    right: 1.2rem;
+    padding: 1.2rem 2rem;
   }
   section{
     padding: 10rem 3% 2rem;
@@ -957,14 +970,16 @@ body.modal-open{
   }
   .navbar{
     position: absolute;
-    top: 100%;
+    top: calc(100% + 1rem);
     right: 0;
     width: 50%;
     padding: 1rem 3%;
-    background: var(--card-bg);
-    border-left: 2px solid var(--main-color);
-    border-bottom: 2px solid var(--main-color);
-    border-bottom-left-radius: 2rem;
+    background: var(--header-bg);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid var(--header-border);
+    border-radius: 2rem;
+    box-shadow: var(--header-shadow);
     display: none;
   }
   .navbar.active{
